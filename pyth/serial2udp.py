@@ -76,11 +76,23 @@ def dump_serial(args):
     
 #     for s in SerialReader.serialLineGen(ser):
     for s in SerialReader.serialLineGen(ser, args):
-        if args.verbose>1:
-            print(s)
-        count=udpsock.sendto(s.encode(), (args.host, args.port))
+        send_line=False
+        if args.ifstarts_with!='':
+            if s.startswith(args.ifstarts_with):
+                send_line=True
+                s=s[len(args.ifstarts_with):]
+        else:
+            send_line=True
 
-
+        if send_line:
+#             print('.',end='',flush=True)
+            if args.verbose>1:
+                print(s)
+            count=udpsock.sendto(s.encode(), (args.host, args.port))
+        else:
+            if args.verbose>1:
+                print('line does not match ({})'.format(s))
+                
 def main(argv=None): # IGNORE:C0111
     '''Command line options.'''
 

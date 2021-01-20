@@ -3,7 +3,7 @@ Created on Oct 6, 2020
 
 @author: blew
 '''
-
+# from random import random
 
 
 def serialBytesGen(sercon):
@@ -16,7 +16,7 @@ def serialLineGen(sercon,args):
 
         if args.dummy!="":
             import time
-            print('.',end='',flush=True)
+#             print('.',end='',flush=True)
             time.sleep(args.dummy_wait)
             s=args.dummy
         else:
