@@ -6,7 +6,9 @@ import os
 
 
 def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname), encoding='utf-8').read()
+    return open(os.path.join(os.path.dirname(__file__), fname), 
+#                 encoding='utf-8'
+                ).read()
 
 os.environ["CC"] = "c++" 
 os.environ["CXX"] = "c++"
@@ -37,7 +39,7 @@ required_packages=read('requirements.txt').split()
 #     )
 
 setup(name='serial2udp',
-      version='1.0.7',
+      version='1.0.8',
       description='serial2udp transceiver',
       long_description=read('README.md'),
       long_description_content_type='text/markdown',
