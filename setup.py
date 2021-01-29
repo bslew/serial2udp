@@ -10,6 +10,8 @@ def read(fname):
 os.environ["CC"] = "c++" 
 os.environ["CXX"] = "c++"
 
+required_packages=read('requirements.txt').split()
+
 # # Common flags for both release and debug builds.
 # extra_compile_args = sysconfig.get_config_var('CFLAGS').split()
 # extra_compile_args += ["-std=c++11", "-Wall", "-Wextra"]
@@ -40,9 +42,7 @@ setup(name='serial2udp',
       author='Bartosz Lew',
       author_email='bartosz.lew@protonmail.com',
       url='',
-      install_requires=[
-#           'serial',
-      ],      
+      install_requires=required_packages,      
       package_dir = {'': 'pyth'},
       packages = ['SerialReader',
                   ],
