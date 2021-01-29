@@ -1,58 +1,77 @@
-# GENERAL
+# General
 
-This package implements serial port to UDP packet transceiver.
+This is serial port to UDP packet transceiver.
+The reads serial port ascii and sends the text as UDP datagrams if the lines match selection criteria.
 
-# DOWNLOAD 
+# Installation
 
+To install from pypi run
+
+```sh
+pip install serial2udp
 ```
-git clone ssh://gitolite@galaxy.astro.uni.torun.pl/rt32tmsrv
+
+## From Sources
+
+```sh 
+$ git clone ssh://gitolite@galaxy.astro.uni.torun.pl/serial2udp
 ```
 
-# INSTALL FROM SOURCE
-
-```$ git clone ssh://gitolite@galaxy/serial2udp serial2udp
+```sh
 $ cd serial2udp
-$ python3 -m venv venv
-$ source venv/bin/activate
-$ python setup.py build
-$ python setup.py install
 ```
 
-# USE
+```sh
+$ python3 -m venv venv
+```
 
-Suppose you read data from a serial port of a device /dev/device1 and want to distribute that data via UDP packages to a local network
+```sh
+$ source venv/bin/activate
+```
+
+```sh
+$ python setup.py build install
+```
+
+# Use example
+
+Suppose you read data from a serial port of a device `/dev/device1` and want to distribute that data via UDP packages to a local network.
 
 Suppose the device generates ascii text lines:
 
 	line1 word1 word2 ...
+
 	line2 word3 word4 ...
-	...
-	udp key1=val1, key2=val2,...
-	lineN ...
-	udp key3=val3, key4=val4,...
+
+	 ...
+
+	udp key1=val1, key2=val2, ...
+
+	lineN  ...
+
+	udp key3=val3, key4=val4, ...
 
 
-If we wish to distribute lines only that start with udp run:
+If we wish to distribute only the lines that start with udp the following command will do it:
 
-```
-serial2udp.py --serport /dev/device1 --host xxx.xxx.xxx.xxx -p port --ifstarts_with 'udp'
+```sh
+serial2udp.py --serport /dev/device1 --host xxx.xxx.xxx.xxx -p port --ifstarts_with 'udp '
 ```
 
 For the example above this command will generate two UDP datagrams.
 
-The program does not parse the data in any way, but if --ifstarts_with option is used, the line string is stripped with the value of that option ("udp" in this case).
+The program does not parse the data in ny way, but if `--ifstarts_with` option is used, the line string is stripped off of the value given in that option (\'udp \' in this case). The serial communication options are customizable.
 
-The serial communication options are customizable.
+# Usage
 
-# HELP
-```
-$ path/to/serial2udp/venv/bin/serial2udp.py --help
 
+```{r}
+$ serial2udp.py --help
 usage: serial2udp.py [-h] [-v] [-V] [--serport SERPORT] [--baudrate BAUDRATE]
-                 [--parity PARITY] [--bytesize BYTESIZE]
-                 [--stopbits STOPBITS] [--host HOST] [-p PORT]
-                 [--dummy DUMMY] [--dummy_wait DUMMY_WAIT]
-                 [--ifstarts_with IFSTARTS_WITH]
+                     [--parity PARITY] [--bytesize BYTESIZE]
+                     [--stopbits STOPBITS] [--host HOST] [-p PORT]
+                     [--dummy DUMMY] [--dummy_wait DUMMY_WAIT]
+                     [--ifstarts_with IFSTARTS_WITH]
 
 serial2udp -- connect to serial port and dump data to UDP packages
 
@@ -86,11 +105,9 @@ optional arguments:
                         send UDP only if the serial line starts with this
                         string [default: ]
 ```
-   
 
 
-# AUTHOR
-Bartosz Lew [<bartosz.lew@umk.pl>](bartosz.lew@umk.pl)
+# Author
 
-# BUGS
-Send info to author or to [rt4-dev@cosmo.torun.pl](rt4-dev@cosmo.torun.pl)
+Bartosz Lew \<bartosz.lew@protonmail.com\>
+
