@@ -36,7 +36,7 @@ required_packages=read('requirements.txt').split()
 #     )
 
 setup(name='serial2udp',
-      version='1.0',
+      version='1.0.2',
       description='serial2udp transceiver',
       long_description=read('README.md'),
       author='Bartosz Lew',
