@@ -14,7 +14,7 @@ pip install serial2udp
 ## From Sources
 
 ```sh 
-$ git clone ssh://gitolite@galaxy.astro.uni.torun.pl/serial2udp
+$ git clone https://github.com/bslew/serial2udp.git serial2udp
 ```
 
 ```sh

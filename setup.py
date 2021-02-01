@@ -39,13 +39,13 @@ required_packages=read('requirements.txt').split()
 #     )
 
 setup(name='serial2udp',
-      version='1.0.8',
+      version='1.0.9',
       description='serial2udp transceiver',
       long_description=read('README.md'),
       long_description_content_type='text/markdown',
       author='Bartosz Lew',
       author_email='bartosz.lew@protonmail.com',
-      url='',
+      url='https://github.com/bslew/serial2udp',
       install_requires=required_packages,      
       package_dir = {'': 'pyth'},
       packages = ['SerialReader',
