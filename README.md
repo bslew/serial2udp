@@ -50,9 +50,17 @@ If we wish to distribute only the lines that start with udp the following comman
 serial2udp.py --serport /dev/device1 --host xxx.xxx.xxx.xxx -p port --ifstarts_with 'udp '
 ```
 
+or simply 
+
+```sh
+serial2udp --serport /dev/device1 --host xxx.xxx.xxx.xxx -p port --ifstarts_with 'udp '
+```
+
 For the example above this command will generate two UDP datagrams.
 
 The program does not parse the data in ny way, but if `--ifstarts_with` option is used, the line string is stripped off of the value given in that option (\'udp \' in this case). The serial communication options are customizable.
+
+
 
 # Usage
 
