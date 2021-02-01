@@ -14,23 +14,15 @@ pip install serial2udp
 ## From Sources
 
 ```sh 
-$ git clone https://github.com/bslew/serial2udp.git serial2udp
-```
+git clone https://github.com/bslew/serial2udp.git serial2udp
 
-```sh
-$ cd serial2udp
-```
+cd serial2udp
 
-```sh
-$ python3 -m venv venv
-```
+python3 -m venv venv
 
-```sh
-$ source venv/bin/activate
-```
+source venv/bin/activate
 
-```sh
-$ python setup.py build install
+python setup.py build install
 ```
 
 # Use example
