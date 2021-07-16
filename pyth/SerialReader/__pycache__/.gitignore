@@ -1,2 +1,6 @@
 /__init__.cpython-36.pyc
 /SerialReader.cpython-36.pyc
+/SerialReader.cpython-38.pyc
+/UDPreader.cpython-38.pyc
+/__init__.cpython-38.pyc
+/udp2serial.cpython-38.pyc
