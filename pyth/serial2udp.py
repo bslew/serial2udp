@@ -18,6 +18,7 @@ It defines classes_and_methods
 
 import sys
 import os
+from multiprocessing import Process,Manager
 
 from argparse import ArgumentParser
 from argparse import RawDescriptionHelpFormatter
@@ -25,7 +26,9 @@ from argparse import RawDescriptionHelpFormatter
 from socket import *
 import serial
 
-from SerialReader import SerialReader
+from SerialReader import SerialReader, UDPreader
+
+
 
 __all__ = []
 __version__ = 0.1
@@ -47,11 +50,7 @@ class CLIError(Exception):
         return self.msg
 
 
-
-
-def dump_serial(args):
-    '''
-    '''
+def init_serial(args):
     PARITY=serial.PARITY_NONE
     if args.parity=='None':
         PARITY=serial.PARITY_NONE
@@ -71,6 +70,31 @@ def dump_serial(args):
         if ser.port is None:
             ser.port.open()
 
+    return ser
+
+def dump_serial(args, **kwargs):
+    '''
+    '''
+    ser=init_serial(args)
+    
+    srvdata=Manager().dict()
+    srvdata['toserial']=None
+    kwargs['srv']=srvdata
+
+    if args.verbose>1:
+        print('starting srv thread')
+
+    p=Process(target=UDPreader.udpsrv,
+              args=(args,),
+              kwargs=kwargs,
+              daemon=True,
+              )
+    p.start()
+#     p.join()
+    
+    if args.verbose>1:
+        print('starting srv thread')
+    
     udpsock = socket(AF_INET, SOCK_DGRAM)
     udpsock.setsockopt(SOL_SOCKET, SO_BROADCAST, 1)
     
@@ -92,6 +116,31 @@ def dump_serial(args):
         else:
             if args.verbose>1:
                 print('line does not match ({})'.format(s))
+
+
+        if srvdata['toserial']!=None:
+            print('sending to serial: "{}"'.format(srvdata['toserial']))
+            if not srvdata['toserial'].endswith('\n'):
+                srvdata['toserial']=srvdata['toserial']+'\n'
+            ser.write(srvdata['toserial'].encode())
+            srvdata['toserial']=None
+            
+
+def read_test(args):
+    ser=init_serial(args)
+    while 1:
+#         s=input('input character to send: ')
+        s='DUPA\n'
+        print('sending "{}" to serial'.format(s))
+        ser.write(s.encode())
+        b=None
+        msg=''
+        while b!=b'\n':
+            b=ser.read(1)
+            msg=msg+b.decode()
+        print('received: "{}"'.format(msg))
+            
+            
                 
 def main(argv=None): # IGNORE:C0111
     '''Command line options.'''
@@ -138,6 +187,7 @@ USAGE
         parser.add_argument('--bytesize', type=int, help='serial communication bytesize [default: %(default)s] ', default=8)
         parser.add_argument('--stopbits', type=int, help='serial communication stopbits [default: %(default)s] ', default=1)
         parser.add_argument('--host', type=str, help='UDP datagram destination host [default: %(default)s] ', default='127.0.0.1')
+        parser.add_argument('--srvport', type=int, help='UDP to serial port [default: %(default)s] ', default=10001)
         parser.add_argument('-p','--port', type=int, help='UDP destination port [default: %(default)s] ', default=10000)
         parser.add_argument('--dummy', type=str, 
                             help='String that should be sent. No serial port is read. [default: %(default)s] ', default='')
@@ -146,16 +196,20 @@ USAGE
         parser.add_argument('--ifstarts_with', type=str, 
                             help='send UDP only if the serial line starts with this string [default: %(default)s] ', default='')
         
+        parser.add_argument('--read_test',action='store_true', default=False, help='triggers read send read mode')
 
         # Process arguments
         args = parser.parse_args()
 
         verbose = args.verbose
-        print(args.verbose)
 
         if verbose > 1:
-            print("Verbose mode on")
+            print("Verbose mode on ({})".format(args.verbose))
 
+
+        if args.read_test:
+            read_test(args)
+            sys.exit(0)
         
         dump_serial(args)
 
