@@ -187,7 +187,8 @@ USAGE
         parser.add_argument('--bytesize', type=int, help='serial communication bytesize [default: %(default)s] ', default=8)
         parser.add_argument('--stopbits', type=int, help='serial communication stopbits [default: %(default)s] ', default=1)
         parser.add_argument('--host', type=str, help='UDP datagram destination host [default: %(default)s] ', default='127.0.0.1')
-        parser.add_argument('--srvport', type=int, help='UDP to serial port [default: %(default)s] ', default=10001)
+        parser.add_argument('--srvhost', type=str, help='UDP to serial command server address [default: %(default)s] ', default='127.0.0.1')
+        parser.add_argument('--srvport', type=int, help='UDP to serial command server port [default: %(default)s] ', default=10001)
         parser.add_argument('-p','--port', type=int, help='UDP destination port [default: %(default)s] ', default=10000)
         parser.add_argument('--dummy', type=str, 
                             help='String that should be sent. No serial port is read. [default: %(default)s] ', default='')

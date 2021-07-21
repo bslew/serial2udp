@@ -34,7 +34,7 @@ def getUDPdatagram(ip,port, multicast=False):
 
 def udpsrv(args, **kwargs):
     print("Started srv thread")
-    for d in getUDPdatagram(args.host,args.srvport):
+    for d in getUDPdatagram(args.srvhost,args.srvport):
         if args.verbose>1:
             print("received new UDP: {}".format(d))
         if 'srv' in kwargs.keys():
