@@ -39,7 +39,7 @@ required_packages=read('requirements.txt').split()
 #     )
 
 setup(name='serial2udp',
-      version='1.0.11',
+      version='1.0.12',
       description='serial2udp transceiver',
       long_description=read('README.md'),
       long_description_content_type='text/markdown',
@@ -51,8 +51,12 @@ setup(name='serial2udp',
       packages = ['SerialReader',
                   ],
       scripts=['pyth/serial2udp.py',
+               'pyth/readUDP.py',
                ],
-      entry_points={ 'console_scripts': [ 'serial2udp = serial2udp:main',],},
+      entry_points={ 
+          'console_scripts': [ 'serial2udp = serial2udp:main',],
+          'console_scripts': [ 'readUDP = readUDP',],
+          },
       classifiers=[
         "Development Status :: 3 - Alpha",
         "Topic :: Utilities",
