@@ -159,7 +159,8 @@ def main(argv=None): # IGNORE:C0111
     
 Examples:
 
-show examples how to use the program... 
+serial2udp.py --serport /dev/device1 --host xxx.xxx.xxx.xxx -p port --ifstarts_with 'udp '
+ 
 '''
     program_license = '''%s
 

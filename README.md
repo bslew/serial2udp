@@ -51,13 +51,13 @@ If we wish to distribute via UDP only the lines that start with "udp "
 execute:
 
 ```sh
-serial2udp.py --serport /dev/device1 --host xxx.xxx.xxx.xxx -p port --ifstarts_with 'udp '
+(venv) $ serial2udp.py --serport /dev/device1 --host xxx.xxx.xxx.xxx -p port --ifstarts_with 'udp '
 ```
 
 or simply 
 
 ```sh
-serial2udp --serport /dev/device1 --host xxx.xxx.xxx.xxx -p port --ifstarts_with 'udp '
+(venv) $ serial2udp --serport /dev/device1 --host xxx.xxx.xxx.xxx -p port --ifstarts_with 'udp '
 ```
 
 For the example above, this command will generate two UDP datagrams containing
@@ -83,11 +83,19 @@ and listen for incomming commands on port 10001 on localhost.
 Execute:
 
 ```sh
-serial2udp.py --serport /dev/device1 --host xxx.xxx.xxx.xxx -p port --ifstarts_with 'udp ' --srvport 10001 --srvhost 127.0.0.1
+(venv) $ serial2udp.py --serport /dev/device1 --host xxx.xxx.xxx.xxx -p port --ifstarts_with 'udp ' --srvport 10001 --srvhost 127.0.0.1
 ```
 
 Now if you send UDP datagram to 127.0.0.1:10001 it will be written directly to the serial port.
 
+# Simple UDP reader
+
+The package contains a simple UDP datagram reader. The read UDP datagrams distributed 
+by the serial2udp program use:
+
+```sh
+(venv) $ readUDP.py 10001 127.0.0.1 0
+```
 
 # Usage
 
