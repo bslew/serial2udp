@@ -36,15 +36,14 @@ def getUDPdatagram(ip,port,N, multicast=False):
 
 
 
-#
-# process cmd params
-#
-#print sys.argv
 
 if len(sys.argv)==1:
-    print("USAGE: readUDP.py [port=33001]  [net=127.0.0.1] [multicast=1/0]")
-    print("Default:")
-    print("multicast=0")
+    print("USAGE: readUDP.py [port 127.0.0.1 multicast=1/0]")
+    print('''Example: read non-multicast datagrams on port 33001 at localhost: 
+    
+(venv) $ readUDP 33001 127.0.0.1 0
+
+''')
     sys.exit(0)
 
 PORT=33001
