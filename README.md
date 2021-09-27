@@ -28,7 +28,8 @@ source venv/bin/activate
 python setup.py build install
 ```
 
-# Use example 1
+# Use examples
+## Example 1
 
 Suppose you read data from a serial port of a device `/dev/device1` and want to distribute that data via UDP packages to a local network.
 
@@ -74,7 +75,7 @@ key3=val3, key4=val4, ...
 
 The program does not parse the data in any way, but if `--ifstarts_with` option is used, the line string is stripped off of the value given in that option (\'udp \' in this case). The serial communication options are customizable.
 
-# Use example 2
+## Example 2
 
 Suppose that you want to perform both read and distribute values read from a device and 
 also receive simple commands via UDP and send them to the device, for example to change 
@@ -88,14 +89,7 @@ Execute:
 
 Now if you send UDP datagram to 127.0.0.1:10001 it will be written directly to the serial port.
 
-# Simple UDP reader
 
-The package contains a simple UDP datagram reader. The read UDP datagrams distributed 
-by the serial2udp program use:
-
-```sh
-(venv) $ readUDP.py 10001 127.0.0.1 0
-```
 
 # Usage
 
@@ -141,6 +135,25 @@ optional arguments:
   --read_test           triggers read send read mode
 
     
+```
+
+
+# Additional scripts
+## Simple UDP reader
+
+The package contains a simple UDP datagram reader and writer. The read UDP datagrams distributed 
+by the serial2udp program use:
+
+```sh
+(venv) $ readUDP.py 10001 127.0.0.1 0
+```
+
+## Simple UDP writer
+
+In order to send a test UDP datagram use:
+
+```sh
+(venv) $ sendUDP.py "example datagram body" 10001 
 ```
 
 

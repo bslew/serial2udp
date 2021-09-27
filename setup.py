@@ -52,10 +52,12 @@ setup(name='serial2udp',
                   ],
       scripts=['pyth/serial2udp.py',
                'pyth/readUDP.py',
+               'pyth/sendUDP.py',
                ],
       entry_points={ 
           'console_scripts': [ 'serial2udp = serial2udp:main',],
-          'console_scripts': [ 'readUDP = readUDP',],
+          # 'console_scripts': [ 'readUDP = readUDP',],
+          # 'console_scripts': [ 'sendUDP = sendUDP',],
           },
       classifiers=[
         "Development Status :: 3 - Alpha",
