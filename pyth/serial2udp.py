@@ -122,7 +122,8 @@ def dump_serial(args, **kwargs):
             print('sending to serial: "{}"'.format(srvdata['toserial']))
             if not srvdata['toserial'].endswith('\n'):
                 srvdata['toserial']=srvdata['toserial']+'\n'
-            ser.write(srvdata['toserial'].encode())
+            if ser:
+                ser.write(srvdata['toserial'].encode())
             srvdata['toserial']=None
             
 
@@ -130,7 +131,6 @@ def read_test(args):
     ser=init_serial(args)
     while 1:
 #         s=input('input character to send: ')
-        s='DUPA\n'
         print('sending "{}" to serial'.format(s))
         ser.write(s.encode())
         b=None
